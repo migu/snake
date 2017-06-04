@@ -9,23 +9,32 @@ import java.util.Random;
  * @author michael.gutbier@codecentric.de
  */
 public class Snake implements Iterable<Cell> {
-    private static final int INITIAL_SIZE = 5;
-
     private LinkedList<Cell> cells = new LinkedList<>();
 
     private Direction direction = Direction.fromInt(new Random().nextInt(4));
 
     private int growByAmount;
 
-    public Snake(int xStart, int yStart) {
+    private boolean alive = true;
+
+    public Snake(int initialSize, int xStart, int yStart) {
         cells.add(new Cell(xStart, yStart));
-        for (int i = 1; i <= INITIAL_SIZE; i++) {
+        for (int i = 1; i <= initialSize - 1; i++) {
             cells.addLast(new Cell(xStart - direction.x * i, yStart - direction.y * i));
         }
     }
 
     public Direction direction() {
         return direction;
+    }
+
+    public void turn(Direction keyDir) {
+        Direction d = direction;
+        if ((d.x == 0 && keyDir.y == 0 && d.y != keyDir.x) || (d.y == 0 && keyDir.x == 0 && d.x == keyDir.y)) {
+            turnLeft();
+        } else if ((d.x == 0 && keyDir.y == 0) || (d.y == 0 && keyDir.x == 0)) {
+            turnRight();
+        }
     }
 
     public void turnLeft() {
@@ -62,6 +71,14 @@ public class Snake implements Iterable<Cell> {
         return cell.x >= 0 && cell.x < bounds.width && cell.y >= 0 && cell.y < bounds.height;
     }
 
+    public boolean tryMove(Dimension fieldSize) {
+        alive = canMove(fieldSize);
+        if (alive) {
+            move();
+        }
+        return alive;
+    }
+
     public Snake move() {
         cells.addFirst(head().next(direction));
         if (growByAmount > 0) {
@@ -75,5 +92,13 @@ public class Snake implements Iterable<Cell> {
     @Override
     public Iterator<Cell> iterator() {
         return cells.iterator();
+    }
+
+    public boolean isDead() {
+        return !alive;
+    }
+
+    public int size() {
+        return cells.size();
     }
 }
