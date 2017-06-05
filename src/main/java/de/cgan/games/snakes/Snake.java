@@ -37,15 +37,15 @@ public class Snake implements Iterable<Cell> {
         }
     }
 
-    public void turnLeft() {
+    private void turnLeft() {
         direction = direction.turnLeft();
     }
 
-    public void turnRight() {
+    private void turnRight() {
         direction = direction.turnRight();
     }
 
-    public Cell head() {
+    private Cell head() {
         return cells.getFirst();
     }
 
@@ -54,12 +54,12 @@ public class Snake implements Iterable<Cell> {
         return this;
     }
 
-    public boolean canMove(Dimension bounds) {
-        Cell nextCell = head().next(direction);
-        return doesNotTouch(nextCell) && cellIsInBounds(nextCell, bounds);
+    private boolean canMove(Dimension bounds) {
+        Cell nextCell = head().next(direction, bounds);
+        return doesNotTouch(nextCell); // && cellIsInBounds(cc, bounds);
     }
 
-    public boolean doesNotTouch(Cell cell) {
+    private boolean doesNotTouch(Cell cell) {
         return !touches(cell);
     }
 
@@ -71,16 +71,16 @@ public class Snake implements Iterable<Cell> {
         return cell.x >= 0 && cell.x < bounds.width && cell.y >= 0 && cell.y < bounds.height;
     }
 
-    public boolean tryMove(Dimension fieldSize) {
-        alive = canMove(fieldSize);
+    public boolean tryMove(Dimension bounds) {
+        alive = canMove(bounds);
         if (alive) {
-            move();
+            move(bounds);
         }
         return alive;
     }
 
-    public Snake move() {
-        cells.addFirst(head().next(direction));
+    private Snake move(Dimension bounds) {
+        cells.addFirst(head().next(direction, bounds));
         if (growByAmount > 0) {
             growByAmount--;
         } else {

@@ -32,8 +32,6 @@ public class Main extends JFrame implements ActionListener {
 
     private final Random positionRandom = new Random(System.currentTimeMillis());
 
-    private boolean running;
-
     private Snake snake = createSnake();
 
     private Optional<Cell> apple = Optional.empty();
@@ -46,8 +44,10 @@ public class Main extends JFrame implements ActionListener {
                 timer.stop();
                 System.exit(0);
             case KeyEvent.VK_SPACE:
-                reset();
-                startGameLoop();
+                if (!timer.isRunning()) {
+                    reset();
+                    startGameLoop();
+                }
                 break;
             }
             ArrowKey.fromKeyCode(e.getKeyCode()).ifPresent(k -> actOnKey(k));
@@ -108,14 +108,10 @@ public class Main extends JFrame implements ActionListener {
     }
 
     private void startGameLoop() {
-        if (!running) {
-            running = true;
-            timer.start();
-        }
+        timer.start();
     }
 
     private void stopGameLoop() {
-        running = false;
         timer.stop();
     }
 
