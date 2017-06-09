@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * @author michael.gutbier@codecentric.de
+ * @author dev@michael-gutbier.de
  */
 public enum ArrowKey {
     UP(KeyEvent.VK_UP, Direction.north()), DOWN(KeyEvent.VK_DOWN, Direction.south()), //

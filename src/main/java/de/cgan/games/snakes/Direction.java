@@ -1,9 +1,7 @@
 package de.cgan.games.snakes;
 
-import java.util.Objects;
-
 /**
- * @author michael.gutbier@codecentric.de
+ * @author dev@michael-gutbier.de
  */
 public class Direction extends Vector {
     private Direction(int x, int y) {

@@ -3,7 +3,7 @@ package de.cgan.games.snakes;
 import java.awt.*;
 
 /**
- * @author michael.gutbier@codecentric.de
+ * @author dev@michael-gutbier.de
  */
 public class Cell extends Vector {
     public Cell(int x, int y) {

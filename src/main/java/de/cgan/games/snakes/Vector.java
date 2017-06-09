@@ -3,7 +3,7 @@ package de.cgan.games.snakes;
 import java.util.Objects;
 
 /**
- * @author michael.gutbier@codecentric.de
+ * @author dev@michael-gutbier.de
  */
 public class Vector {
     public final int x;

@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.Random;
 
 /**
- * @author michael.gutbier@codecentric.de
+ * @author dev@michael-gutbier.de
  */
 public class Main extends JFrame implements ActionListener {
     private static final Dimension FIELD_SIZE = new Dimension(75, 75);
@@ -70,6 +70,7 @@ public class Main extends JFrame implements ActionListener {
         requestFocus();
         pack();
         setVisible(true);
+        createBufferStrategy(2);
     }
 
     private void setFrameBounds() {
@@ -118,7 +119,6 @@ public class Main extends JFrame implements ActionListener {
     @Override
     public void paint(Graphics g) {
         if (bs == null) {
-            createBufferStrategy(2);
             bs = getBufferStrategy();
         }
         do {

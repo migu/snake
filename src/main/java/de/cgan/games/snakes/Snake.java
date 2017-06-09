@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 /**
- * @author michael.gutbier@codecentric.de
+ * @author dev@michael-gutbier.de
  */
 public class Snake implements Iterable<Cell> {
     private LinkedList<Cell> cells = new LinkedList<>();
@@ -18,9 +18,8 @@ public class Snake implements Iterable<Cell> {
     private boolean alive = true;
 
     public Snake(int initialSize, int xStart, int yStart) {
-        cells.add(new Cell(xStart, yStart));
-        for (int i = 1; i <= initialSize - 1; i++) {
-            cells.addLast(new Cell(xStart - direction.x * i, yStart - direction.y * i));
+        for (int i = 0; i < initialSize; i++) {
+            cells.add(new Cell(xStart - direction.x * i, yStart - direction.y * i));
         }
     }
 
