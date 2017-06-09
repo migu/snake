@@ -17,8 +17,8 @@ public class Snake implements Iterable<Cell> {
 
     private boolean alive = true;
 
-    public Snake(int initialSize, int xStart, int yStart) {
-        for (int i = 0; i < initialSize; i++) {
+    public Snake(int initialLength, int xStart, int yStart) {
+        for (int i = 0; i < initialLength; i++) {
             cells.add(new Cell(xStart - direction.x * i, yStart - direction.y * i));
         }
     }
